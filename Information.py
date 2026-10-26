@@ -2,26 +2,19 @@ import random as rand
 
 class Information:
 
-    basses = {'Synth Bass': 38,"Baratone Sax":67,"Synth Bass 2":87,"Fretless Bass":35}
-    chords = {"Drawbar Organ":17,"Electric Piano":6,"Fantasia":89,"Skakuhachi":78,"Ocarina":79,"Halo":94}
+    basses = {'Synth Bass': 38,"Baritone Sax":67,"Synth Bass 2":87,"Fretless Bass":35}
+    chords = {"Drawbar Organ":17,"Electric Piano":6,"Fantasia":89,"Shakuhachi":78,"Ocarina":79,"Halo":94}
     leads = {"Solo Vox":85,"Piano":1,"Marimba":12,"Strings":45,"Violin":40}
 
-    def __init__(self,mood, tempo, zany, jazzy, chord, bass, lead):
-        
+    def __init__(self, mood="Happy", tempo="Moderate", zany=0, jazzy=0,
+                 chord="Drawbar Organ", bass="Synth Bass", lead="Solo Vox"):
         self.mood = mood
         self.tempo = tempo
         self.zany = zany
         self.jazzy = jazzy
-        self.chord_int = self.chords[chord]
-        self.chord_string = chord
-        self.bass_int = self.basses[bass]
-        self.bass_string = bass
-        self.lead_int = self.leads[lead]
-        self.lead_string = lead
-        
-
-    def __init__(self):
-        pass
+        self.set_chord_string(chord)
+        self.set_bass_string(bass)
+        self.set_lead_string(lead)
 
     def get_bass_int(self):
         return self.bass_int
@@ -88,16 +81,16 @@ class Information:
 
 
     def randomize(self):
-        basses = ['Synth Bass',"Baratone Sax","Synth Bass 2","Fretless Bass"]
-        chords = ["Drawbar Organ","Electric Piano","Fantasia","Skakuhachi","Ocarina","Halo"]
+        basses = ['Synth Bass',"Baritone Sax","Synth Bass 2","Fretless Bass"]
+        chords = ["Drawbar Organ","Electric Piano","Fantasia","Shakuhachi","Ocarina","Halo"]
         leads = ["Solo Vox","Piano","Marimba","Strings","Violin"]
 
         temp = ['Very Slow','Slow','Moderate','Fast','Very Fast']
         moods = ['Happy','Cool','Dark','Funky','Dreamy','Sad','Tense']
         self.jazzy = round(rand.random()*100)
-        self.mood = moods[rand.randint(0,6)]
-        self.tempo = temp[rand.randint(0,4)]
-        self.set_bass_int(basses[rand.randint(0,len(basses)-1)])
-        self.set_chord_int(chords[rand.randint(0,len(chords)-1)])
-        self.set_lead_int(leads[rand.randint(0,len(leads) -1)])
+        self.mood = rand.choice(moods)
+        self.tempo = rand.choice(temp)
+        self.set_bass_string(basses[rand.randint(0,len(basses)-1)])
+        self.set_chord_string(chords[rand.randint(0,len(chords)-1)])
+        self.set_lead_string(leads[rand.randint(0,len(leads) -1)])
         self.zany = round(rand.random()*100)
